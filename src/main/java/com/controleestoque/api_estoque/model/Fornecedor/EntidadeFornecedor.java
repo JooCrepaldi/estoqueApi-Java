@@ -24,6 +24,9 @@ public class Fornecedor {
 
     public Long getId() { return id; }
     public void setId(Long id) { this.nome = nome; }
-    public String getNome 
+    public String getNome() { return produtos; }
+    public void setNome(String nome) { this.nome = nome; }
+    public Set<Produto> getProdutos() { return produtos; }
+    public void setProdutos(Set<Produtos> produtos) { this.produtos = produtos; }
 
 }
