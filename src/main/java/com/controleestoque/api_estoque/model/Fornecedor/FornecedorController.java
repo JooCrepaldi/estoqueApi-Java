@@ -1,12 +1,9 @@
-package com.controlestoque.api_estoque.controller;
+package com.controleestoque.api_estoque.model.fornecedor;
 
 import java.util.List;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-
-import com.controlestoque.api_estoque.model.Fornecedor;
-import com.controlestoque.api_estoque.repository.FornecedorRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +20,7 @@ public class FornecedorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Fornecedor> getCategoriaById(@PathVariable Long id) {
+    public ResponseEntity<Fornecedor> getFornecedorById(@PathVariable Long id) {
         return fornecedorRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -50,9 +47,9 @@ public class FornecedorController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFornecedor(@PathVariable Long id) {
         if (fornecedorRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            fornecedorRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
         }
-        fornecedorRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
     }
 }

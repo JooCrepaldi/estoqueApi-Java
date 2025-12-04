@@ -1,6 +1,8 @@
-package com.controleestoque.api_estoque.model;
+package com.controleestoque.api_estoque.model.estoque;
 
 import jakarta.persistence.*;
+
+import com.controleestoque.api_estoque.model.produto.Produto;
 
 @Entity
 @Table(name = "tb_estoques")

@@ -1,9 +1,13 @@
-package com.controleestoque.api_estoque.model;
+package com.controleestoque.api_estoque.model.produto;
 
 import java.math.BigDecimal;
 import java.util.Set;
 
 import jakarta.persistence.*;
+
+import com.controleestoque.api_estoque.model.categoria.Categoria;
+import com.controleestoque.api_estoque.model.estoque.Estoque;
+import com.controleestoque.api_estoque.model.fornecedor.Fornecedor;
 
 @Entity
 @Table(name = "tb_produtos")

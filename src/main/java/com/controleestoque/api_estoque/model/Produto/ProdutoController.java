@@ -1,17 +1,14 @@
-package com.controlestoque.api_estoque.controller;
+package com.controleestoque.api_estoque.model.produto;
 
 import java.util.List;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.controlestoque.api_estoque.model.Produto;
-import com.controlestoque.api_estoque.repository.ProdutoRepository;
+import com.controleestoque.api_estoque.model.categoria.CategoriaRepository;
+import com.controleestoque.api_estoque.model.fornecedor.FornecedorRepository;
 
 import lombok.RequiredArgsConstructor;
-
-import com.controlestoque.api_estoque.repository.CategoriaRepository;
-import com.controlestoque.api_estoque.repository.FornecedorRepository;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -28,33 +25,37 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> getCategoriaById(@PathVariable Long id) {
+    public ResponseEntity<Produto> getProdutoById(@PathVariable Long id) {
         return produtoRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Produto> createProduto(@RequestBody Produto produto) {
 
         if (produto.getCategoria() == null || produto.getCategoria().getId() == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(null);
         }
+
         categoriaRepository.findById(produto.getCategoria().getId())
                 .ifPresent(produto::setCategoria);
 
         if (produto.getFornecedores() != null && !produto.getFornecedores().isEmpty()) {
+
+            List<Long> ids = produto.getFornecedores().stream()
+                    .map(f -> f.getId())
+                    .toList();
+
             produto.getFornecedores().clear();
 
-            produto.getFornecedores().forEach(fornecedor -> {
-                fornecedorRepository.findById(fornecedor.getId())
-                        .ifPresent(produto.getFornecedores()::add);
+            ids.forEach(idFornecedor -> {
+                fornecedorRepository.findById(idFornecedor)
+                        .ifPresent(f -> produto.getFornecedores().add(f));
             });
         }
 
         Produto savedProduto = produtoRepository.save(produto);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(savedProduto);
     }
 

@@ -1,8 +1,8 @@
-package com.controleestoque.api_estoque.repository;
+package com.controleestoque.api_estoque.model.estoque;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.controleestoque.api_estoque.model.Produto;
+import com.controleestoque.api_estoque.model.produto.*;
 
 @Repository
 public interface EstoqueRepository extends JpaRepository<Produto, Long>{

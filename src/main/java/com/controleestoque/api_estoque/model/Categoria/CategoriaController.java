@@ -1,13 +1,11 @@
-package com.controlestoque.api_estoque.controller;
+package com.controleestoque.api_estoque.model.categoria;
 
-import com.controlestoque.api_estoque.model.Categoria;
-import com.controlestoque.api_estoque.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/categorias")

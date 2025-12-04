@@ -1,9 +1,8 @@
-package com.controleestoque.api_estoque.repository;
+package com.controleestoque.api_estoque.model.categoria;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.controleestoque.api_estoque.model.Produto;
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<Produto, Long>{
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 }
